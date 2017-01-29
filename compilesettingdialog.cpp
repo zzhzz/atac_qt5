@@ -123,13 +123,14 @@ CompileSettingDialog::~CompileSettingDialog()
 
 QStringList CompileSettingDialog::getOptions(){
     QStringList result;
-    if(main_filename.isEmpty() == false) result << QString(" -f "+main_filename);
-    if(output_filename.isEmpty() == false) result << QString(" -o " + output_filename);
-    if(program_version.isEmpty() == false) result << QString(" -v " + program_version);
-    if(directory_type.isEmpty() == false) result << QString(" -D " + directory_type);
-    if(CPP_FLAGS.isEmpty() == false) result << QString(" -C " + QString("\"" + CPP_FLAGS + "\""));
-    if(LD_FLAGS.isEmpty() == false) result << QString(" -L " + QString("\""+ LD_FLAGS + "\""));
-    if(INCLUDE_DIR.isEmpty() == false) result << QString(" -I " + QString("\"" + INCLUDE_DIR +"\""));
+    result.clear();
+    if(main_filename.isEmpty() == false) result << QString("-f") << main_filename;
+    if(output_filename.isEmpty() == false) result << QString("-o") << output_filename;
+    if(program_version.isEmpty() == false) result << QString("-v") + program_version;
+    if(directory_type.isEmpty() == false) result << QString("-D") + directory_type;
+    if(CPP_FLAGS.isEmpty() == false) result << QString("-C" + QString("\"" + CPP_FLAGS + "\""));
+    if(LD_FLAGS.isEmpty() == false) result << QString("-L" + QString("\""+ LD_FLAGS + "\""));
+    if(INCLUDE_DIR.isEmpty() == false) result << QString("-I" + QString("\"" + INCLUDE_DIR +"\""));
 
     return result;
 }
@@ -144,7 +145,7 @@ void CompileSettingDialog::Set_Outputfile_Name(const QString &filename){
 
 void CompileSettingDialog::Choose_Mainfile_Name(){
     main_filename = QFileDialog::getOpenFileName(this,"choose the file contains main function",
-                                                 "/home");
+                                                 Project_Path);
     mainfile_path_Edit->setText(main_filename);
 }
 
@@ -166,4 +167,12 @@ void CompileSettingDialog::Set_Directory_Type(const QString &text){
 
 void CompileSettingDialog::Set_Program_Version(const QString &version){
     program_version = version;
+}
+
+QString CompileSettingDialog::get_Output_path(){
+    return output_filename;
+}
+
+void CompileSettingDialog::set_Project_path(QString path){
+    Project_Path = path;
 }

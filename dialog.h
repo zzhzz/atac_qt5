@@ -26,7 +26,10 @@ private slots:
 
 private:
     QString ProjectPath;
+    QString Out_file_path;
+
     QLineEdit *pathedit;
+
     Ui::Dialog *ui;
 };
 

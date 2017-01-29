@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QLabel>
 #include "compileDialog.h"
+#include "testdialog.h"
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -36,6 +37,7 @@ Dialog::Dialog(QWidget *parent) :
     connect(pathedit,SIGNAL(textChanged(QString)),this,SLOT(changeDirectory()));
     connect(openbtn,SIGNAL(clicked(bool)),this,SLOT(openProjectDir()));
     connect(compilebtn,SIGNAL(clicked(bool)),this,SLOT(compilingProject()));
+    connect(testingbtn,SIGNAL(clicked(bool)),this,SLOT(testingProject()));
     setWindowTitle("atac user interface");
     setLayout(mainlayout);
 }
@@ -47,19 +49,23 @@ void Dialog::changeDirectory()
 
 void Dialog::openProjectDir()
 {
-    ProjectPath = QFileDialog::getExistingDirectory(this,tr("choose the Project Directory"),"/home");
+    ProjectPath = QFileDialog::getExistingDirectory(this,tr("choose the Project Directory"),QString("/home"));
     pathedit->setText(ProjectPath);
 }
 
 void Dialog::compilingProject()
 {
     compileDialog *dialog = compileDialog::getDialog(this);
-    dialog->show();
+    dialog->set_project_path(ProjectPath);
+    dialog->exec();
+    Out_file_path = dialog->get_OutPut_Path();
 }
 
 void Dialog::testingProject()
 {
-
+    TestDialog *dialog = TestDialog::getDialog(this);
+    dialog->set_Program_name(Out_file_path);
+    dialog->exec();
 }
 
 void Dialog::analyzeProject()

@@ -26,12 +26,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         dialog.cpp \
     compileDialog.cpp \
-    compilesettingdialog.cpp
+    compilesettingdialog.cpp \
+    testwidget.cpp \
+    testdialog.cpp \
+    detaildialog.cpp
 
 HEADERS  += dialog.h \
     compilesettingdialog.h \
-    compileDialog.h
+    compileDialog.h \
+    testwidget.h \
+    testdialog.h \
+    detaildialog.h
 
 FORMS    += dialog.ui \
     compileDialog.ui \
-    compilesettingdialog.ui
+    compilesettingdialog.ui \
+    testwidget.ui \
+    testdialog.ui \
+    detaildialog.ui

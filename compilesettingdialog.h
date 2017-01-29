@@ -19,11 +19,14 @@ public:
     ~CompileSettingDialog();
 
     QStringList getOptions();
+    QString get_Output_path();
+
     static CompileSettingDialog* getDialog(QWidget * parent = 0){
         static CompileSettingDialog* dialog = new CompileSettingDialog(parent);
         return dialog;
     }
 
+    void set_Project_path(QString path);
 
 private slots:
     void Set_Mainfile_Name(const QString & filename);
@@ -38,8 +41,9 @@ private slots:
 private:
     explicit CompileSettingDialog(QWidget *parent = 0);
 
-
     Ui::CompileSettingDialog *ui;
+
+    QString Project_Path;
     QString main_filename;
     QString output_filename;
     QString directory_type;
