@@ -1,12 +1,14 @@
 #include "detaildialog.h"
 #include "ui_detaildialog.h"
 #include <QProcess>
+#include <QLineEdit>
 #include <QTextBrowser>
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QFileDialog>
 
 DetailDialog::DetailDialog(QWidget *parent) :
     QDialog(parent),
@@ -15,6 +17,16 @@ DetailDialog::DetailDialog(QWidget *parent) :
     process = new QProcess(this);
 
     QVBoxLayout *main_layout = new QVBoxLayout;
+
+    QHBoxLayout *Input_Layout = new QHBoxLayout;
+    edit = new QLineEdit(this);
+    QLabel *editor = new QLabel("inputfile: ", this);
+    QPushButton *browse_btn = new QPushButton("browse",this);
+
+    Input_Layout->addWidget(editor);
+    Input_Layout->addWidget(edit);
+    Input_Layout->addWidget(browse_btn);
+
 
     QVBoxLayout *out_Layout = new QVBoxLayout;
     QVBoxLayout *error_Layout = new QVBoxLayout;
@@ -35,6 +47,7 @@ DetailDialog::DetailDialog(QWidget *parent) :
     button_Layout->addWidget(run_btn);
     button_Layout->addWidget(close_btn);
 
+    main_layout->addLayout(Input_Layout);
     main_layout->addLayout(out_Layout);
     main_layout->addLayout(error_Layout);
     main_layout->addLayout(button_Layout);
@@ -45,6 +58,8 @@ DetailDialog::DetailDialog(QWidget *parent) :
     connect(process,SIGNAL(readyReadStandardError()),this,SLOT(set_Error()));
     connect(run_btn,SIGNAL(clicked(bool)),this,SLOT(running()));
     connect(close_btn,SIGNAL(clicked(bool)),this,SLOT(close()));
+    connect(edit,SIGNAL(textChanged(QString)),this,SLOT(set_Input_File(QString)));
+    connect(browse_btn,SIGNAL(clicked(bool)),this,SLOT(browse_Inputfile()));
 
     ui->setupUi(this);
 }
@@ -77,8 +92,16 @@ void DetailDialog::running(){
     } else {
         Program_Output->clear();
         Program_Error->clear();
-        process->start(program_path);
+        process->start(program_path,QStringList() << Input_file);
         // input
     }
+}
 
+void DetailDialog::set_Input_File(QString name){
+    Input_file = name;
+}
+
+void DetailDialog::browse_Inputfile(){
+    Input_file = QFileDialog::getOpenFileName(this,"choose input file",program_path);
+    edit->setText(Input_file);
 }
