@@ -8,6 +8,7 @@
 #include <QLabel>
 #include "compileDialog.h"
 #include "testdialog.h"
+#include "analyzedialog.h"
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -38,6 +39,7 @@ Dialog::Dialog(QWidget *parent) :
     connect(openbtn,SIGNAL(clicked(bool)),this,SLOT(openProjectDir()));
     connect(compilebtn,SIGNAL(clicked(bool)),this,SLOT(compilingProject()));
     connect(testingbtn,SIGNAL(clicked(bool)),this,SLOT(testingProject()));
+    connect(analyzebtn,SIGNAL(clicked(bool)),this,SLOT(analyzeProject()));
     setWindowTitle("atac user interface");
     setLayout(mainlayout);
 }
@@ -70,7 +72,9 @@ void Dialog::testingProject()
 
 void Dialog::analyzeProject()
 {
-
+    AnalyzeDialog *dialog = AnalyzeDialog::getDialog(this);
+    dialog->set_Project_path(ProjectPath);
+    dialog->exec();
 }
 
 QString Dialog::getProjectPath(){

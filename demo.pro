@@ -29,18 +29,27 @@ SOURCES += main.cpp\
     compilesettingdialog.cpp \
     testwidget.cpp \
     testdialog.cpp \
-    detaildialog.cpp
+    detaildialog.cpp \
+    analyzedialog.cpp \
+    analyzesettingsdialog.cpp \
+    atactmdialog.cpp
 
 HEADERS  += dialog.h \
     compilesettingdialog.h \
     compileDialog.h \
     testwidget.h \
     testdialog.h \
-    detaildialog.h
+    detaildialog.h \
+    analyzedialog.h \
+    analyzesettingsdialog.h \
+    atactmdialog.h
 
 FORMS    += dialog.ui \
     compileDialog.ui \
     compilesettingdialog.ui \
     testwidget.ui \
     testdialog.ui \
-    detaildialog.ui
+    detaildialog.ui \
+    analyzedialog.ui \
+    analyzesettingsdialog.ui \
+    atactmdialog.ui

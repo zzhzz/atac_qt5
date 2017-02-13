@@ -85,7 +85,7 @@ void compileDialog::setting_options(){
     CompileSettingDialog *dialog = CompileSettingDialog::getDialog(this);
     dialog->set_Project_path(ProjectPath);
     dialog->exec();
-    options.append(dialog->getOptions());
+    options = dialog->getOptions();
     OutPut_Path = ProjectPath + "/" + dialog->get_Output_path();
 }
 
