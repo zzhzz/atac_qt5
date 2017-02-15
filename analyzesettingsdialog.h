@@ -2,6 +2,8 @@
 #define ANALYZESETTINGSDIALOG_H
 
 #include <QDialog>
+#include "atacfiledsettingwidget.h"
+#include "atacsummarysettingwidget.h"
 
 namespace Ui {
 class AnalyzeSettingsDialog;
@@ -24,7 +26,8 @@ private slots:
 private:
     explicit AnalyzeSettingsDialog(QWidget *parent = 0);
     ~AnalyzeSettingsDialog();
-
+    AtacFiledSettingWidget *filedsetting;
+    AtacSummarySettingWidget *summarysetting;
     QStringList options;
     Ui::AnalyzeSettingsDialog *ui;
 };

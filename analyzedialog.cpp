@@ -18,7 +18,7 @@ AnalyzeDialog::AnalyzeDialog(QWidget *parent) :
 {
     process = new QProcess(this);
 
-    QPushButton *atactm_btn = new QPushButton("atactm", this);
+   // QPushButton *atactm_btn = new QPushButton("atactm", this);
     QPushButton *close_btn = new QPushButton("close", this);
     QPushButton *analyze_btn = new QPushButton("analyze", this);
     QPushButton *setting_btn = new QPushButton("settings", this);
@@ -51,7 +51,7 @@ AnalyzeDialog::AnalyzeDialog(QWidget *parent) :
 
     btn_layout->addWidget(setting_btn);
     btn_layout->addWidget(analyze_btn);
-    btn_layout->addWidget(atactm_btn);
+  //  btn_layout->addWidget(atactm_btn);
     btn_layout->addWidget(close_btn);
 
     QVBoxLayout *output_layout = new QVBoxLayout;
@@ -73,7 +73,7 @@ AnalyzeDialog::AnalyzeDialog(QWidget *parent) :
 
     connect(setting_btn,SIGNAL(clicked(bool)),this,SLOT(setting_options()));
     connect(analyze_btn,SIGNAL(clicked(bool)),this,SLOT(launch_analyzing()));
-    connect(atactm_btn,SIGNAL(clicked(bool)),this,SLOT(launch_atactmDialog()));
+//    connect(atactm_btn,SIGNAL(clicked(bool)),this,SLOT(launch_atactmDialog()));
     connect(browse_tracefile,SIGNAL(clicked(bool)),this,SLOT(choose_tracefile()));
     connect(browse_atacfile,SIGNAL(clicked(bool)),this,SLOT(choose_atacfiles()));
     connect(close_btn,SIGNAL(clicked(bool)),this,SLOT(close()));

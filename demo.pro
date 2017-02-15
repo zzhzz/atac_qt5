@@ -32,7 +32,10 @@ SOURCES += main.cpp\
     detaildialog.cpp \
     analyzedialog.cpp \
     analyzesettingsdialog.cpp \
-    atactmdialog.cpp
+    atactmdialog.cpp \
+    radiosettingwidget.cpp \
+    atacfiledsettingwidget.cpp \
+    atacsummarysettingwidget.cpp
 
 HEADERS  += dialog.h \
     compilesettingdialog.h \
@@ -42,7 +45,10 @@ HEADERS  += dialog.h \
     detaildialog.h \
     analyzedialog.h \
     analyzesettingsdialog.h \
-    atactmdialog.h
+    atactmdialog.h \
+    radiosettingwidget.h \
+    atacfiledsettingwidget.h \
+    atacsummarysettingwidget.h
 
 FORMS    += dialog.ui \
     compileDialog.ui \
@@ -52,4 +58,8 @@ FORMS    += dialog.ui \
     detaildialog.ui \
     analyzedialog.ui \
     analyzesettingsdialog.ui \
-    atactmdialog.ui
+    atactmdialog.ui \
+    analyzefiledsettingwidget.ui \
+    radiosettingwidget.ui \
+    atacfiledsettingwidget.ui \
+    atacsummarysettingwidget.ui
