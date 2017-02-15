@@ -26,3 +26,7 @@ QString RadioSettingWidget::get_option(){
     if(statu) return option;
     else  return QString("");
 }
+
+bool RadioSettingWidget::get_statu(){
+    return statu;
+}

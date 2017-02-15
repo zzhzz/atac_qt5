@@ -52,6 +52,9 @@ void Dialog::changeDirectory()
 void Dialog::openProjectDir()
 {
     ProjectPath = QFileDialog::getExistingDirectory(this,tr("choose the Project Directory"),QString("/home"));
+    if(ProjectPath.at(ProjectPath.length()-1) != '/'){
+        ProjectPath += "/";
+    }
     pathedit->setText(ProjectPath);
 }
 

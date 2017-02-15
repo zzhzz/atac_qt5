@@ -16,6 +16,7 @@ public:
     ~RadioSettingWidget();
 
     QString get_option();
+    bool get_statu();
 private slots:
     void change_statu();
 private:

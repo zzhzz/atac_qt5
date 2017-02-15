@@ -72,11 +72,11 @@ QStringList AtacFiledSettingWidget::get_options(){
     if(!function.isEmpty()){
         options << QString("-F") << function;
     }
-    options << block_box->get_option();
-    options << decision_box->get_option();
-    options << computational_box->get_option();
-    options << predicate_box->get_option();
-    options << entries_box->get_option();
+    if(block_box->get_statu()) options << block_box->get_option();
+    if(decision_box->get_statu()) options << decision_box->get_option();
+    if(computational_box->get_statu()) options << computational_box->get_option();
+    if(predicate_box->get_statu()) options << predicate_box->get_option();
+    if(entries_box->get_statu()) options << entries_box->get_option();
 
     return options;
 }

@@ -24,8 +24,8 @@ AnalyzeDialog::AnalyzeDialog(QWidget *parent) :
     QPushButton *setting_btn = new QPushButton("settings", this);
     QPushButton *browse_atacfile = new QPushButton("browse", this);
     QPushButton *browse_tracefile = new QPushButton("browse", this);
-    QLineEdit *tracefile_path = new QLineEdit(this);
-    QLineEdit *atacfile_path = new QLineEdit(this);
+    tracefile_path = new QLineEdit(this);
+    atacfile_path = new QLineEdit(this);
     QLabel *trace_label = new QLabel("tracefile: ", this);
     QLabel *atacfile_label = new QLabel("atacfile: ", this);
     output_browser = new QTextBrowser(this);
@@ -98,11 +98,8 @@ void AnalyzeDialog::setting_options(){
 
 void AnalyzeDialog::launch_analyzing(){
     if(!atacfiles.isEmpty()){
-        if(!tracefile.isEmpty()){
-            process->start("atac",QStringList() << options << atacfiles << tracefile);
-        } else {
-              QMessageBox::warning(this,tr("no path"),tr("no tracefile path specified, please check"),QMessageBox::Ok);
-        }
+            output_browser->setText(QString(options.join(" ").constData()));
+            process->start("atac", QStringList() << options << atacfiles);
     } else {
           QMessageBox::warning(this,tr("no path"),tr("no atacfiles path specified, please check"),QMessageBox::Ok);
     }
@@ -116,11 +113,13 @@ void AnalyzeDialog::launch_atactmDialog(){
 void AnalyzeDialog::choose_atacfiles(){
     QStringList files = QFileDialog::getOpenFileNames(this,tr("choose atac files"),Project_path);
     atacfiles = files;
+    atacfile_path->setText(QString(files.join(",").constData()));
 }
 
 void AnalyzeDialog::choose_tracefile(){
     QString file = QFileDialog::getOpenFileName(this,tr("choose trace file"),Project_path);
     tracefile = file;
+    tracefile_path->setText(file);
 }
 
 void AnalyzeDialog::set_Project_path(QString path){

@@ -40,11 +40,11 @@ AtacSummarySettingWidget::~AtacSummarySettingWidget()
 QStringList AtacSummarySettingWidget::get_options(){
     QStringList opts;
     opts << "-s";
-    opts << only_testable->get_option();
-    opts << test_cost->get_option();
-    opts << cumulative_coverage_pertest->get_option();
-    opts << per_function->get_option();
-    opts << per_sourcefile->get_option();
-    opts << per_testcase->get_option();
+    if(only_testable->get_statu()) opts << only_testable->get_option();
+    if(test_cost->get_statu()) opts << test_cost->get_option();
+    if(cumulative_coverage_pertest->get_statu()) opts << cumulative_coverage_pertest->get_option();
+    if(per_function->get_statu()) opts << per_function->get_option();
+    if(per_sourcefile->get_statu()) opts << per_sourcefile->get_option();
+    if(per_testcase->get_statu()) opts << per_testcase->get_option();
     return opts;
 }

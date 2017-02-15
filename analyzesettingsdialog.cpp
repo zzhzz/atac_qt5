@@ -31,7 +31,7 @@ AnalyzeSettingsDialog::~AnalyzeSettingsDialog()
 
 QStringList AnalyzeSettingsDialog::getoptions(){
     QStringList options;
-    options << filedsetting->get_options();
-    options << summarysetting->get_options();
+    options = options + summarysetting->get_options();
+    options = options + filedsetting->get_options();
     return options;
 }

@@ -85,7 +85,7 @@ void compileDialog::setting_options(){
     CompileSettingDialog *dialog = CompileSettingDialog::getDialog(this);
     dialog->set_Project_path(ProjectPath);
     dialog->exec();
-    options = dialog->getOptions();
+    options << dialog->getOptions();
     OutPut_Path = ProjectPath + "/" + dialog->get_Output_path();
 }
 
@@ -93,20 +93,40 @@ void compileDialog::launch_compiling(){
     if(ProjectPath.isEmpty()){
         QMessageBox::warning(this,tr("no path"),tr("no project path specified, please check"),QMessageBox::Ok);
     } else {
-        QFile *makefile = new QFile(QString(ProjectPath+"/Makefile"));
+        QFile *configurefile = new QFile(QString(ProjectPath+"configure"));
+        if(configurefile->exists()){
+            process->start("./configure");
+            if(!process->waitForStarted()){
+                error_Info_Browser->setText("configure false");
+                return;
+            }
+            while(false == process->waitForFinished()){
+                output_Info_Browser->setText("configuring");
+            }
+        } else {
+            QMessageBox::warning(this,tr("no configurefile"),tr("no configurefile found under the project path, please check"),QMessageBox::Ok);
+        }
+
+        QFile *makefile = new QFile(QString(ProjectPath+"Makefile"));
         if(makefile->exists()){
             //compiling
-            process->start(tr("make CC=atacCC"));
+            process->start("make CC=atacCC");
+            if(!process->waitForStarted()){
+                error_Info_Browser->setText("compile false");
+                return;
+            }
+            while(false == process->waitForFinished()){
+                output_Info_Browser->setText("Compiling");
+            }
         } else {
             QMessageBox::warning(this,tr("no makefile"),tr("no makefile found under the project path, please check"),QMessageBox::Ok);
         }
-
     }
 }
 
 void compileDialog::set_project_path(QString path){
     ProjectPath = path;
-    options << "-p" << ProjectPath;
+    process->setWorkingDirectory(ProjectPath);
 }
 
 QString compileDialog::get_OutPut_Path(){
@@ -140,6 +160,6 @@ void compileDialog::launch_automake(){
         QMessageBox *box = new QMessageBox(this);
         box->setText(opt);
         box->show();
-        process->start("mkMakefile", options);
+        process->start("/bin/bash", QStringList() << "/home/zzhzz/Documents/auto/mkMakefile.sh" << options);
     }
 }

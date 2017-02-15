@@ -146,6 +146,7 @@ void CompileSettingDialog::Set_Outputfile_Name(const QString &filename){
 void CompileSettingDialog::Choose_Mainfile_Name(){
     main_filename = QFileDialog::getOpenFileName(this,"choose the file contains main function",
                                                  Project_Path);
+    main_filename.replace(Project_Path,QString(""));
     mainfile_path_Edit->setText(main_filename);
 }
 

@@ -8,7 +8,7 @@ class AnalyzeDialog;
 }
 class QProcess;
 class QTextBrowser;
-
+class QLineEdit;
 class AnalyzeDialog : public QDialog
 {
     Q_OBJECT
@@ -39,6 +39,8 @@ private:
     QStringList options;
     QProcess *process;
 
+    QLineEdit *tracefile_path;
+    QLineEdit *atacfile_path;
     QTextBrowser *output_browser;
     QTextBrowser *error_browser;
     Ui::AnalyzeDialog *ui;
